@@ -27,7 +27,12 @@ class Practice
 
     public function bookPost()
     {
-        register_post_type('book', ['label' => 'Books', 'public' => true]);
+        register_post_type('books',
+            ['label' => 'Books',
+                'public' => true,
+                'taxonomies' => ['category', 'post_tag'],
+                'show_in_admin_bar' => 'true'
+                , 'can_export' => true]);
     }
 }
 
