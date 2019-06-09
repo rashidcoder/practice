@@ -1,0 +1,17 @@
+.practice-container {
+    widows: 100%;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid #aeaeae;
+}
+
+.practice-conainer .center-v {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.center-h {
+    margin: 0 auto;
+}

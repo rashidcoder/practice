@@ -1,62 +1,86 @@
 <?php
 
-/*
- *
- * PLUGIN NAME: practice
- * PLUGIN URI: rashidcoder.com
+/**
+ * PLUGIN NAME: Practice
+ * PLUGIN URI: begaak.com
  * AUTHOR: Rashid Iqbal
- * Description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam corrupti ea, velit minima provident mollitia fugiat aperiam, nemo earum reprehenderit vitae similique nulla obcaecati! Blanditiis, in! Vel possimus cumque modi.
- * LICENSE: MIT
- *
+ * AUTHOR URI: rashidcoder.com
+ * DESCRIPTION: lore ipsum dore
+ * TAGS: ab, bc, cd, de
  */
-
-// https://github.com/rashidcoder/practice.git master
 
 class Practice
 {
+
+    public $plugin_name;
+    public $plugin_url;
+    public $plugin_path;
+
     public function __construct()
     {
-        # this books posts line  is just for practice
+        $plugin_url = plugin_dir_url(__FILE__);
+        $plugin_path = plugin_dir_path(__FILE__);
+        $plugin_name = plugin_basename( __FILE__ );
+
         add_action('init', [$this, 'bookPost']);
-        add_action('wp_enqueue_scripts', [$this, 'loadStyles']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueueStyles']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueAdminStyles']);
         add_action('admin_menu', [$this, 'adminMenu']);
+        add_filter( 'plugin_action_links_'.$plugin_name, [$this,'actionLinks']);
     }
 
     public function bookPost()
     {
-        register_post_type('books',
-            ['label' => 'Books',
-                'public' => true,
-                'taxonomies' => ['category', 'post_tag'],
-                'show_in_admin_bar' => 'true',
-                'can_export' => true]);
+        register_post_type('books', ['label' => 'Books',
+            'public' => true,
+            'taxonomies' => ['category', 'post_tag'],
+            'show_in_admin_bar' => true,
+            'can_export' => true]);
     }
 
-    public function loadStyles()
+    public function enqueueStyles()
     {
-        wp_enqueue_style('colors-css', plugin_dir_url(__FILE__) .
-            '/assets/css/colors.css',[],'1.0.0');
+        wp_enqueue_style('colors-css', $this->plugin_url . '/assets/css/colors.css', [], '1.0.0');
+    }
+
+    public function enqueueAdminStyles()
+    {
+        wp_enqueue_style('admin-css', $this->plugin_url . '/assets/css/admin.css', [], '1.0.0');
     }
 
     public function adminMenu()
     {
-        // add_menu_page( $page_title:string, $menu_title:string, $capability:string, $menu_slug:string, $function:callable, $icon_url:string, $position:integer|null )
-        add_menu_page( 'Practice Dashboard', 'Practice Dash', 'manage_options', 
-        'books_dash', [$this,'practiceAdmin'], 'dashicons-store', 110 );
+        add_menu_page('Practice Dashboard', 'Practice', 'manage_options', 'practice_dash',
+            [$this, 'adminPage'], 'dashicons-store', 110);
     }
 
-    public function practiceAdmin() {
-        echo "<b> hello world </b>";
+    public function adminPage()
+    {
+        // include_once plugin_dir_path(__FILE__) . '/templates/admin.php';
+        include_once plugin_dir_path(__FILE__).'/templates/admin.php';
+
+
     }
 
+    public function actionLinks($links) {
+        $settings = '<a href="#">Settings</a>';
+        array_push($links,$settings);
+        return $links;
+    } 
+
+    public function activate()
+    {
+        flush_rewrite_rules();
+    }
+    public function deactivate()
+    {
+        flush_rewrite_rules();
+    }
 }
 
-if (class_exists("Practice")) {
+if (class_exists('Practice')) {
     $practice = new Practice();
 }
 
-require_once plugin_dir_path(__FILE__) . '/inc/ActivatePlugin.php';
-require_once plugin_dir_path(__FILE__) . '/inc/DeactivatePlugin.php';
-
-register_activation_hook(__FILE__, [ActivatePlugin, 'activate']);
-register_deactivation_hook(__FILE, [DeactivatePlugin, 'deactivate']);
+register_activation_hook(__FILE__, [$practice, 'activate']);
+register_deactivation_hook(__FILE__, [$practice, 'deactivate']);
