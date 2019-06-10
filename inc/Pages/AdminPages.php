@@ -2,12 +2,13 @@
 
 namespace Inc\Pages;
 
-class AdminPages
+use Inc\Base\BaseController;
+
+class AdminPages extends BaseController
 {
 
     public function register()
     {
-
         // add_action('init', [$this, 'bookPost']);
         add_action('admin_menu', [$this, 'adminMenu']);
     }
@@ -20,12 +21,8 @@ class AdminPages
 
     public function adminPage()
     {
-        $this->page();
-    }
 
-    public function page()
-    {
-        echo '<h1 style="text-align:center">Humpy Dumpy</h1>';
+        include_once $this->plugin_path . 'templates\admin.php';
     }
 
     // public function bookPost()
@@ -38,3 +35,5 @@ class AdminPages
     // }
 
 }
+
+

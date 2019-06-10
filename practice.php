@@ -14,14 +14,10 @@ defined('ABSPATH') or die('you silly human, get yourself back');
 if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
     require_once dirname(__FILE__) . '/vendor/autoload.php';
 }
-
-define(PLUGIN, plugin_basename(__FILE__));
-define(PLUGIN_URL, plugin_dir_url(__FILE__));
-define(PLUGIN_PATH, plugin_dir_path(__FILE__));
+ 
 use Inc\Base\Activate;
 use Inc\Base\Deactivate;
-function activate()
-{
+function activate(){
     # code...
     Activate::activate();
 }

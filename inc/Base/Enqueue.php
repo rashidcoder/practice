@@ -1,7 +1,7 @@
 <?php
 namespace Inc\Base;
 
-class Enqueue
+class Enqueue extends BaseController
 {
     public function __construct()
     {
@@ -15,12 +15,12 @@ class Enqueue
     }
     public function enqueueStyles()
     {
-        wp_enqueue_style('practice-colors', plugin_dir_url(__FILE__) . 'assets/css/colors.css', [], '1.0.0');
+        wp_enqueue_style('practice-colors', $this->plugin_url . 'assets/css/colors.css', [], '1.0.0');
     }
 
     public function enqueueAdminStyles()
     {
-        wp_enqueue_style('practice-admin', plugin_dir_url(__FILE__) . 'assets/css/admin.css', [], '1.0.0');
+        wp_enqueue_style('practice-admin', $this->plugin_url . 'assets/css/admin.css', [], '1.0.0');
     }
 
 }

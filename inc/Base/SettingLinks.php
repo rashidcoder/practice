@@ -1,7 +1,7 @@
 <?php
 namespace Inc\Base;
 
-class SettingLinks
+class SettingLinks extends BaseController
 {
     public function __construct()
     {
@@ -10,7 +10,7 @@ class SettingLinks
 
     public function register()
     {
-        add_filter('plugin_action_links_' . plugin_basename(__FILE__), [$this, 'actionLinks']);
+        add_filter('plugin_action_links_' .$this->plugin, [$this, 'actionLinks']);
     }
     public function actionLinks($links)
     {
@@ -19,3 +19,4 @@ class SettingLinks
         return $links;
     }
 }
+
