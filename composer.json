@@ -1,11 +1,17 @@
 {
-    "name": "rashid/practice",
-    "description": "Practice Plugin",
+    "name": "rashid/pratice",
+    "description": "Humpy Dumpy practice",
     "type": "project",
+    "authors": [{
+        "name": "Rashid Iqbal",
+        "email": "nawoapp1@gmail.com"
+    }],
     "license": "MIT",
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
-        "psr-4": { "Inc\\": "./inc" }
+        "psr-4": {
+            "Inc\\": "./inc"
+        }
     }
 }

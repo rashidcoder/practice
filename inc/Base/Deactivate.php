@@ -1,6 +1,9 @@
-<?php
+<?php 
 
-class DeactivatePlugin
+namespace Inc\Base;
+
+
+class Deactivate
 {
     public function __construct()
     {

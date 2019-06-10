@@ -1,14 +1,13 @@
 <?php
+ 
+namespace Inc\Base;
 
-class ActivatePlugin
-{
-    public function __construct()
-    {
+class Activate {
 
-    }
-
+    
     public static function activate()
-    {
+    { 
         flush_rewrite_rules();
     }
 }
+
