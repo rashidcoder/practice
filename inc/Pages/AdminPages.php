@@ -2,27 +2,42 @@
 
 namespace Inc\Pages;
 
+use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
 
 class AdminPages extends BaseController
 {
 
+    public $settingsApi;
+    public function __construct()
+    {
+        $this->settingsApi = new SettingsApi();
+    }
+
     public function register()
     {
-        // add_action('init', [$this, 'bookPost']);
-        add_action('admin_menu', [$this, 'adminMenu']);
-    }
+        $pages = [
+            [
+                'page_title' => 'Practice',
+                'menu_title' => 'Practice',
+                'capability' => 'manage_options',
+                'menu_slug' => 'practice',
+                'callback' => function () {echo "hello world";},
+                'icon_url' => 'dashicons-store',
+                'position' => 110,
+            ],
+            [
+                'page_title' => 'Practice Test',
+                'menu_title' => 'Practice Test',
+                'capability' => 'manage_options',
+                'menu_slug' => 'practice_2',
+                'callback' => function () {echo "hello world";},
+                'icon_url' => 'dashicons-external',
+                'position' => 111,
+            ],
+        ];
 
-    public function adminMenu()
-    {
-        add_menu_page('Practice Dashboard', 'Practice', 'manage_options', 'practice_dash',
-            [$this, 'adminPage'], 'dashicons-store', 110);
-    }
-
-    public function adminPage()
-    {
-
-        include_once $this->plugin_path . 'templates\admin.php';
+        $this->settingsApi->addPages($pages)->register();
     }
 
     // public function bookPost()
@@ -35,5 +50,3 @@ class AdminPages extends BaseController
     // }
 
 }
-
-

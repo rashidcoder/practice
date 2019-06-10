@@ -17,6 +17,7 @@ if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
  
 use Inc\Base\Activate;
 use Inc\Base\Deactivate;
+
 function activate(){
     # code...
     Activate::activate();
