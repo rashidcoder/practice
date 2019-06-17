@@ -5,26 +5,45 @@ class SettingsApi
 {
 
     public $admin_pages = [];
+    public $admin_sub_pages = [];
 
-    public function addPages(array $pages)
+    public function pages(array $pages, array $sub_pages)
     {
         $this->admin_pages = $pages;
-        return $this;
+        $this->admin_sub_pages = $sub_pages;
     }
-
     public function register()
     {
+        add_action('admin_menu', [$this, 'addMenu']);
+    }
+
+    public function addMenu()
+    {
+
         if (!empty($this->admin_pages)) {
-            add_action('admin_menu', [$this, 'addMenuPage']);
+            $this->addPages();
         }
     }
 
-    public function addMenuPage()
+    public function addPages()
     {
+     
+        
         foreach ($this->admin_pages as $page) {
-            # code...
-            add_menu_page($page['page_title'], $page['menu_title'], $page['capability'],
-                $page['menu_slug'], $page['callback'], $page['icon_url'], $page['position']);
+            add_menu_page(
+                $page['page_title'],
+                $page['menu_title'],
+                $page['capability'],
+                $page['menu_slug'],
+                $page['callback'],
+                $page['icon'],
+                $page['position']
+            );
+
+        }
+
+        foreach ($this->admin_sub_pages as $sub_page) {
+            add_submenu_page($sub_page['parent_slug'], $sub_page['page_title'], $sub_page['menu_title'], $sub_page['capability'], $sub_page['menu_slug'], $sub_page['callback']);
         }
     }
 }
