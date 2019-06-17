@@ -5,7 +5,7 @@
     border: 2px solid #aeaeae;
 }
 
-.practice-conainer .center-v {
+.practice-container .center-v {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -14,4 +14,11 @@
 
 .center-h {
     margin: 0 auto;
+}
+
+.practice-menu_page_practice_dashboard .notice.is-dismissible,
+.practice-menu_page_practice_cpt .notice.is-dismissible,
+.practice-menu_page_practice_taxonomies .notice.is-dismissible,
+.practice-menu_page_practice_widgets .notice.is-dismissible {
+    display: none;
 }
