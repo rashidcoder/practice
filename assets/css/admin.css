@@ -22,3 +22,11 @@
 .practice-menu_page_practice_widgets .notice.is-dismissible {
     display: none;
 }
+
+ul.nav-tabs li.active {
+    background-color: white;
+}
+
+ul.nav-tabs a {
+    text-decoration: none;
+}

@@ -1,30 +1,35 @@
- 
+<?php settings_errors(); ?>
 
-<div id="piechart"></div>
- 
+<!-- <form action="options.php" method="post">
+<?php
+// settings_fields('practice_group');
+// do_settings_sections('practice');
+// submit_button();
+?>
 
-<script type="text/javascript">
-// Load google charts
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+</form> -->
 
-// Draw the chart and set the chart values
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-  ['Task', 'Hours per Day'],
-  ['Work', 8],
-  ['Eat', 2],
-  ['TV', 4],
-  ['Gym', 2],
-  ['Sleep', 8]
-]);
-
-  // Optional; add a title and set the width and height of the chart
-  var options = {'title':'My Average Day', 'width':550, 'height':400};
-
-  // Display the chart inside the <div> element with id="piechart"
-  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-  chart.draw(data, options);
-}
-</script>
- 
+<div class="practice_dash">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab-1">Manage Settings</a></li>
+        <li class=""><a href="#tab-2">Updates</a></li>
+        <li class=""><a href="#tab-3">About Us</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="tab-1">
+            <form method="post" action="options.php">
+                <?php
+                settings_fields("practice_group");
+                do_settings_sections("practice");
+                submit_button();
+                ?>
+            </form>
+        </div>
+        <div id="tab-2">
+            <h3>Updates</h3>
+        </div>
+        <div id="tab-3">
+            <h3>About Us</h3>
+        </div>
+    </div>
+</div>
