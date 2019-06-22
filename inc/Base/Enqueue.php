@@ -22,6 +22,7 @@ class Enqueue extends BaseController
     {
         wp_enqueue_style("practice-admin",plugin_dir_url(dirname(__FILE__,2)) . "assets/css/admin.css");
         wp_enqueue_script("google-charts", "https://www.gstatic.com/charts/loader.js");
+        wp_enqueue_script( 'practice-admin', plugin_dir_url(dirname(__FILE__,2))."/assets/js/admin.js" );
 
     }
 
